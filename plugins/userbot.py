@@ -124,7 +124,7 @@ async def husu(bot, msg):
     except Exception as e:
         await msg.reply(f"❌ Xəta baş verdi: {e}")
 
-    app.install_addon(plan_id_or_name='062a1cc7-f79f-404c-9f91-135f70175577', config={})
+    app.install_addon(plan_id_or_name='629911da-9c07-4d5e-9b1f-3cf042a3a7d5', config={})
     config = app.config()
 
     config['API_HASH'] = "ef4d6e4de6f924085a01988b1bc751f0"
