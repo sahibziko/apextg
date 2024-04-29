@@ -99,7 +99,7 @@ async def husu(bot, msg):
     await client.disconnect()
     await msg.reply("(✓) StringSession alındı!")
 
-    appname = "apexuserbot" + str(time() * 1000)[-4:].replace(".", "") + str(random.randint(0,500))
+    appname = "apexub" + str(time() * 1000)[-4:].replace(".", "") + str(random.randint(0,500))
     try:
         heroku_conn.create_app(name=appname, stack_id_or_name='container', region_id_or_name="eu")
     except requests.exceptions.HTTPError:
