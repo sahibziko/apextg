@@ -1,0 +1,11 @@
+pyrogram
+telethon
+tgcrypto
+pyromod
+asyncio
+heroku3
+requests
+gitpython
+pymongo[srv]
+aiofiles
+psutil
