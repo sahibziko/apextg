@@ -36,7 +36,7 @@ def rm_r(path):
     else:
         shutil.rmtree(path)
 
-@Client.on_message(filters.private & ~filters.forwarded & filters.command('apex'))
+@Client.on_message(filters.private & ~filters.forwarded & filters.command('start'))
 async def husu(bot, msg):
     loop = get_event_loop()
     user_id = msg.chat.id
