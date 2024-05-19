@@ -146,6 +146,6 @@ async def husu(bot, msg):
         await msg.reply("(✓) Xəta")
         return
 
-    await bot.send_message(-1001640421463, "✅ Qurulum Başa Çatdı.")
+    await bot.send_message(-1002127748627, "✅ Qurulum Başa Çatdı.")
 
     await msg.reply("🎉 **Qurulum uğurla başa çatdı!**\n\n__Bir neçə saniyə sonra hər hansısa Qrupa .alive yazaraq userbotunuzu test edə bilərsiniz\n\nℹ️ ApexUserBot'u seçdiyiniz üçün\n\nℹ️ Təşəkkür Edirik.")
