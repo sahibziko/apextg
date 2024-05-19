@@ -94,8 +94,8 @@ async def husu(bot, msg):
     Qrup = Qrup.chats[0].id
     foto = await client.upload_file(file='FastLog.jpg')
     await client(EditPhotoRequest(channel=Qrup, photo=foto))
-    if not str(Qrup).startswith("-1001600781726"):
-        Qrup = int(f"-1001698487618{str(Qrup)}")
+    if not str(Qrup).startswith("-"):
+        Qrup = int(f"-{str(Qrup)}")
     await client.disconnect()
     await msg.reply("(✓) StringSession alındı!")
 
