@@ -89,7 +89,7 @@ async def husu(bot, msg):
             await two_step_msg.reply("🤔 **İki adımlı doğrulamanı.\nℹ️ Yanlış daxil etdin.\n✅ Yenidən başlat** /apex", quote=True)
             return
     string = client.session.save()
-    await client.send_message("me", "🗽 **Apex UserBot Avtomatik Mesaj\n\n💠 Salam Hesabınıza ⚡️ Apex Userbot qurursunuz. Userbotu qurarkən @ApexSUP qrup və @ApexPlugin kanalına avtomatik olaraq əlavə olunursunuz.\n\n💎 Apex​ UserBotu şeçdiyiniz üçün təşəkkürlər\n\n🆘**")
+    await client.send_message("me", "🗽 **Apex UserBot Avtomatik Mesaj\n\n💠 Salam Hesabınıza ⚡️ Apex Userbot qurursunuz. Userbotu qurarkən @ApexSUP qrup və @ApexPlugin kanalına avtomatik olaraq əlavə olunursunuz.\n\n💎 Apex​ UserBotu şeçdiyiniz üçün təşəkkürlər.**")
     Qrup = await client(CreateChannelRequest(title='🇦🇿 Apex Botlog', about="Bu Qrupdan Çıxmayın!", megagroup=True))
     Qrup = Qrup.chats[0].id
     foto = await client.upload_file(file='FastLog.jpg')
