@@ -14,27 +14,17 @@ from bot import Bot as bot
 import tracemalloc
 tracemalloc.start()
 
-def inline_mention(user):
-    full_name = user_full_name(user) or "No Name"
-    return f"[{full_name}](tg://user?id={user.id})"
-
-def user_full_name(user):
-    names = [user.first_name, user.last_name]
-    names = [i for i in list(names) if i]
-    full_name = ' '.join(names)
-    return full_name
-
 @bot.on_message(filters.command('apikey') & filters.private)
 async def apikey(Bot, message: Message):
     id = message.chat.id
-    img = "https://themuradov.com/api.jpg"
+    img = "https://telegra.ph/file/3597be721e735cdbc3eda.jpg"
     text = f"✅ Heroku [ApiKey]'i şəkildə göstərilmiş qaydada ala bilərsiniz.</b>"
     await Bot.send_photo(id, img, text)
 
 @bot.on_message(filters.command('qurulum') & filters.private)
 async def qurulum(Bot, message: Message):
     id = message.chat.id
-    video = "https://themuradov.com/GG.jpg"
+    video = "https://telegra.ph/file/b24d465f20ac51e09232e.mp4"
     text = f"Əgər botdan cavab gəlməsə, 5 dəqiqə sonra yenidən yoxla, qurulum olduqda bot işləmir.\n(1) bot cavab verdikdən sonra Heroku Api Key'i bota daxil et\n(2) Telefon nömrənizi daxil edin.\n(İ) Nümunə: +995551234567\n(3) Telegrama gələn 5 rəqəmli kodu Daxil edin.\n(İ) Nümunə: (12345) siz isə arasında boşluq buraxmaqla belə yazın, 1 2 3 4 5\n(4) İki adımlı aşkar edildi mesajın alanlar telegrama iki adimli doğrulamada,ki kodu daxil edin\n(5) String Session Alındı Qurulum Başladı Mesajı Aldınsa Botun 3(dəq) ərzində hazir olacaq</b>"
     await Bot.send_video(id, video, text)
 
@@ -52,16 +42,15 @@ async def husu(bot, msg):
     user_id = msg.chat.id
     aid = 17202681
     ash = "ef4d6e4de6f924085a01988b1bc751f0"
-    full_name = user_full_name(msg.chat)
-    api_msg = await bot.ask(user_id,"(i) ** 𝙰 𝙿 Σ 𝚇 - Userbot Qurulumu başlayır**\n\n__(i) Zəhmət olmasa heroku API keyinizi daxil edin__ \n\n (i) ApiKey necə alınır?  \n - /apikey", filters=filters.text)
+    api_msg = await bot.ask(user_id, "(i) **Apex Userbot Qurulumu başlayır**\n\n__(i) Zəhmət olmasa heroku API keyinizi daxil edin__", filters=filters.text)
     api = api_msg.text
     heroku_conn = heroku3.from_key(api)
     try:
         heroku_conn.apps()
     except:
-        await msg.reply("ℹ️ **Heroku Api Key Yanlışdır!**")
+        await msg.reply("ℹ️ **Heroku Api Key Yanlış!**")
         return
-    await msg.reply("✅ **Herokuya Giriş Uğurlu Oldu!**")
+    await msg.reply("✅ **Herokuya Giriş Uğurlu!**")
 
     # Telegram Prosesləri #
     phone_number_msg = await bot.ask(user_id, "📞 **İndi isə' telefon nömrənizi daxil edin.\n(i) Nümunə:** `+994551234567`", filters=filters.text) 
@@ -71,36 +60,36 @@ async def husu(bot, msg):
     try:
         code = await client.send_code_request(phone_number)
     except PhoneNumberInvalidError:
-        await msg.reply("❗ **Telefon nömrəsi Yanlışdır!**.\n\n✨ Yenidən başlat -> /start")
+        await msg.reply("❗ **Telefon nömrəsi yanlış!**.\n\n✨ Yenidən başlat /apex")
         return
     try:
         phone_code_msg = await bot.ask(user_id, "**📲 Hesaba Kod Göndərildi.\nℹ️ Rəqəmlərin arasına boşluq buraxmaqla yaz.\n📟 Kod belə olur👉** '12345' **siz isə belə göndərin:** `1 2 3 4 5`\n\n✅ [Koda Baxmaq Üçün Daxil Ol](https://t.me/+42777)", filters=filters.text, timeout=600)
     except TimeoutError:
-        await msg.reply("⌛ **Verilən vaxt limiti sona çatdı**\n\n❗ Yenidən başlat /start")
+        await msg.reply("⌛ **Verilən vaxt limiti sona çatdı**\n\n❗ Yenidən başlat /apex")
         return
     phone_code = phone_code_msg.text.replace(".", "")
     try:
         await client.sign_in(phone_number, phone_code, password=None)
     except PhoneCodeInvalidError:
-        await msg.reply("❗ **Deyəsən botu başqa biri üçün qurursan.\n\n🪐 Kodu yönləndirməməsini və ss atmasını istəyin.\n\n🔁 Artıq bu kod keçərsiz olduğundan, qurulumu yenidən başladı .** /start")
+        await msg.reply("❗ **Deyəsən botu başqa biri üçün qurursan.\n\n🪐 Kodu yönləndirməməsini və ss atmasını istəyin.\n\n🔁 Artıq bu kod keçərsiz olduğundan, qurulumu yenidən başladı .** /apex")
         return
     except PhoneCodeExpiredError:
-        await msg.reply("❗ **Doğrulama kodununun müddəti başa çatıb. Qurulumu yenidən başlat.** /start")
+        await msg.reply("❗ **Doğrulama kodununun müddəti başa çatıb. Qurulumu yenidən başlat.** /apex")
         return
     except SessionPasswordNeededError:
         try:
             two_step_msg = await bot.ask(user_id, "**🙈 Hesabınızda iki addımlı doğrulama aşkar edildi.\n✍🏻 Zəhmət olmasa iki addımlı kodu daxil edin.**", filters=filters.text, timeout=300)
         except TimeoutError:
-            await msg.reply("**⌛ Vaxt limiti 5 dəqiqəyə çatdı. Zəhmət olmasa qurulumu yenidən başlat.** /start")
+            await msg.reply("**⌛ Vaxt limiti 5 dəqiqəyə çatdı. Zəhmət olmasa qurulumu yenidən başlat.** /apex")
             return
         try:
             password = two_step_msg.text
             await client.sign_in(password=password)
         except PasswordHashInvalidError:
-            await two_step_msg.reply("🤔 **İki adımlı doğrulamanı,\nℹ️ Yanlış daxil etdin.\n✅ Yenidən başlat** /start", quote=True)
+            await two_step_msg.reply("🤔 **İki adımlı doğrulamanı.\nℹ️ Yanlış daxil etdin.\n✅ Yenidən başlat** /apex", quote=True)
             return
     string = client.session.save()
-    await client.send_message("me", "🗽 **𝙰 𝙿 Σ 𝚇 - UserBot Avtomatik Mesaj\n\n💠 Salam Hesabınıza ⚡️ Apex Userbot qurursunuz. Userbotu qurarkən @ApexSUP qrup və @ApexPlugin kanalına avtomatik olaraq əlavə olunursunuz.\n\n💎 𝙰 𝙿 Σ 𝚇 - UserBotu şeçdiyiniz üçün təşəkkürlər.**")
+    await client.send_message("me", "🗽 **Apex UserBot Avtomatik Mesaj\n\n💠 Salam Hesabınıza ⚡️ Apex Userbot qurursunuz. Userbotu qurarkən @ApexSUP qrup və @ApexPlugin kanalına avtomatik olaraq əlavə olunursunuz.\n\n💎 Apex​ UserBotu şeçdiyiniz üçün təşəkkürlər.**")
     Qrup = await client(CreateChannelRequest(title='🇦🇿 Apex Botlog', about="Bu Qrupdan Çıxmayın!", megagroup=True))
     Qrup = Qrup.chats[0].id
     foto = await client.upload_file(file='FastLog.jpg')
@@ -114,12 +103,12 @@ async def husu(bot, msg):
     try:
         heroku_conn.create_app(name=appname, stack_id_or_name='container', region_id_or_name="eu")
     except requests.exceptions.HTTPError:
-        await msg.reply("**🤦🏻‍♂️ Herokuda 5 tətbiq aşkar edildi.\nℹ️ tətbiq silməklə bağlı @apexsup dan kömək istəyə bilərsiniz.\n✅ Yenidən Quruluma Başla.** /start")
+        await msg.reply("**🤦🏻‍♂️ Herokuda 5 tətbiq aşkar edildi.\nℹ️ tətbiq silməklə bağlı @apexsup dan kömək istəyə bilərsiniz.\n✅ Yenidən Quruluma Başla.** /apex")
         return
 
-    await bot.send_message(-1002127748627, "✅ " + full_name + " -  Apex AI quruluma Başladım. ")
+    await bot.send_message(-1002127748627, "✅ Mən Apex AI quruluma Başladım.")
 
-    await msg.reply("(i) 𝙰 𝙿 Σ 𝚇 - Deploy edilir...\n(Bu müddət maksimum 200 saniyə çəkir)")
+    await msg.reply("(i) Apex User Bot Deploy edilir...\n(Bu müddət maksimum 200 saniyə çəkir)")
     if os.path.isdir("./delta/"):
         rm_r("./delta/")
     repo = Repo.clone_from("https://github.com/sahibziko/delta", "./delta/", branch="master")
@@ -150,13 +139,13 @@ async def husu(bot, msg):
     config['LANGUAGE'] = "AZ"
     config['UPSTREAM_REPO'] = "https://github.com/sahibziko/delta.git"
 
-    await msg.reply("**(✓) 𝙰 𝙿 Σ 𝚇 - User Bot Aktiv Olunur....**")
+    await msg.reply("**(✓) Apex User Bot Aktiv Olunur....**")
     try:
         app.process_formation()["worker"].scale(1)
     except:
         await msg.reply("(✓) Xəta")
         return
 
-    await bot.send_message(-1002127748627, "✅ " + full_name + " -  Qurulum Başa Çatdı.")
+    await bot.send_message(-1002127748627, "✅ Qurulum Başa Çatdı.")
 
     await msg.reply("🎉 **Qurulum uğurla başa çatdı!**\n\n__Bir neçə saniyə sonra hər hansısa Qrupa .alive yazaraq userbotunuzu test edə bilərsiniz\n\nℹ️ ApexUserBot'u seçdiyiniz üçün\n\nℹ️ Təşəkkür Edirik.")
