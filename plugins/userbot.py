@@ -46,11 +46,16 @@ async def husu(bot, msg):
     user_id = msg.chat.id
     aid = 17202681
     ash = "ef4d6e4de6f924085a01988b1bc751f0"
-     keyboard = [
-        [InlineKeyboardButton("✅ Qurulum Statusu", url=link)]
+    text = "(i) **Apex Userbot Qurulumu başlayır**\n\n__(i) Zəhmət olmasa heroku API keyinizi daxil edin__"
+    
+    # Buton oluşturma
+    keyboard = [
+        [InlineKeyboardButton("✅ Qurulum Statusu", url='https://www.example.com')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    api_msg = await bot.ask(user_id, "(i) **Apex Userbot Qurulumu başlayır**\n\n__(i) Zəhmət olmasa heroku API keyinizi daxil edin__", filters=filters.text, reply_markup=reply_markup)
+    
+    # Kullanıcıdan API anahtarını al
+    api_msg = await bot.ask(user_id, text, filters=filters.text, reply_markup=reply_markup)
     api = api_msg.text
     heroku_conn = heroku3.from_key(api)
     try:
