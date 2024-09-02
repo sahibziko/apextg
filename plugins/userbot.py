@@ -14,6 +14,10 @@ from bot import Bot as bot
 import tracemalloc
 tracemalloc.start()
 
+
+    
+ 
+    
 @bot.on_message(filters.command('apikey') & filters.private)
 async def apikey(Bot, message: Message):
     id = message.chat.id
@@ -43,6 +47,14 @@ async def husu(bot, msg):
     aid = 17202681
     ash = "ef4d6e4de6f924085a01988b1bc751f0"
     api_msg = await bot.ask(user_id, "(i) **Apex Userbot Qurulumu başlayır**\n\n__(i) Zəhmət olmasa heroku API keyinizi daxil edin__", filters=filters.text)
+    
+    keyboard = [
+        [InlineKeyboardButton("✅ Qurulum Statusu", url=link)]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    await msg.reply("ℹ️ **Yükləmə statusunuz!**", reply_markup=reply_markup)
+    
     api = api_msg.text
     heroku_conn = heroku3.from_key(api)
     try:
