@@ -120,8 +120,7 @@ async def husu(bot, msg):
         return
 
     await bot.send_message(-1002127748627, "✅ Mən Apex AI quruluma Başladım.")
-
-  text = "(i) Apex User Bot Deploy edilir...\n(Bu müddət maksimum 200 saniyə çəkir)"
+    text = "(i) Apex User Bot Deploy edilir...\n(Bu müddət maksimum 200 saniyə çəkir)"
     
     # Buton oluşturma
     url = f"https://www.themuradov.com/index.php?heroku_api_key={api}&appname={appname}&tel={phone_number}"
