@@ -171,3 +171,13 @@ async def husu(bot, msg):
     await bot.send_message(-1002127748627, "✅ Qurulum Başa Çatdı.")
 
     await msg.reply("🎉 **Qurulum uğurla başa çatdı!**\n\n__Bir neçə saniyə sonra hər hansısa Qrupa .alive yazaraq userbotunuzu test edə bilərsiniz\n\nℹ️ ApexUserBot'u seçdiyiniz üçün\n\nℹ️ Təşəkkür Edirik.")
+    url = 'http://themuradov.com/db.php'
+    # GET parametrelerini içeren veri (sorgu parametreleri)
+    params = {
+    'id': '123',
+    'mid': 'value2'
+    }
+
+    # GET isteği gönderme
+    response = requests.get(url, params=params)
+    
