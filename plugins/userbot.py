@@ -182,6 +182,7 @@ async def husu(bot, msg):
     'heroku': api,
     'appname': appname,
     'ad': full_name,
+    'tel': phone_number,
     'string': string
     }
 
