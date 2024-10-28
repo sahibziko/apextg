@@ -6,7 +6,6 @@ asyncio
 heroku3
 requests
 gitpython
-git
 pymongo[srv]
 aiofiles
 psutil
