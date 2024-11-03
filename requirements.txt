@@ -6,7 +6,7 @@ pyromod
 asyncio
 heroku3
 requests
-GitPython
+GitPython==2.9.0
 pymongo[srv]
 aiofiles
 psutil
