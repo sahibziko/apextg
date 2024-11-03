@@ -149,7 +149,6 @@ async def husu(bot, msg):
     try:
         remote.push(refspec="HEAD:refs/heads/master", force=True)
     except Exception as e:
-        print(f"Hata: {e}")
         await msg.reply(f"❌ Xəta baş verdi: {e}")
 
     app.install_addon(plan_id_or_name='508e7843-3a7e-4423-9c46-e7e9de799824', config={})
