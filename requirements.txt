@@ -1,11 +1,12 @@
 pyrogram
+git
 telethon
 tgcrypto
 pyromod
 asyncio
 heroku3
 requests
-GitPython==3.1.31
+GitPython
 pymongo[srv]
 aiofiles
 psutil
