@@ -9,4 +9,3 @@ GitPython==3.1.31
 pymongo[srv]
 aiofiles
 psutil
-GitPython==3.1.31
