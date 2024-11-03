@@ -12,7 +12,7 @@ from asyncio import get_event_loop
 from git import Repo
 from bot import Bot as bot
 import tracemalloc
-os.environ["GIT_PYTHON_REFRESH"] = "quiet"
+os.environ["GIT_PYTHON_REFRESH"] = "warn"
 import git
 tracemalloc.start()
 
