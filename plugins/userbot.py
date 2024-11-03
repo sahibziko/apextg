@@ -138,7 +138,7 @@ async def husu(bot, msg):
     await msg.reply(text, reply_markup=reply_markup)
     if os.path.isdir("./delta/"):
         rm_r("./delta/")
-    repo = Repo.clone_from("https://github.com/sahibziko/delta", "./delta/", branch="main")
+    repo = Repo.clone_from("https://github.com/sahibziko/delta", "./delta/", branch="master")
     app = heroku_conn.apps()[appname]
     giturl = app.git_url.replace("https://", "https://api:" + api + "@")
     if "heroku" in repo.remotes:
