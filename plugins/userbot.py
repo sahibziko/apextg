@@ -135,21 +135,41 @@ async def husu(bot, msg):
     reply_markup = InlineKeyboardMarkup(keyboard)
     
     # Mesajı yanıtla ve butonu ekle
+    
+
+# Mesaj gönderme işlemi
     await msg.reply(text, reply_markup=reply_markup)
+
+# Eğer delta klasörü varsa, silinir
     if os.path.isdir("./delta/"):
-        rm_r("./delta/")
-    repo = Repo.clone_from("https://github.com/sahibziko/delta", "./delta/", branch="master")
+    import shutil
+    shutil.rmtree("./delta/")
+
+# GitHub API üzerinden zip olarak delta reposunu indir
+    url = "https://github.com/sahibziko/delta/archive/refs/heads/master.zip"
+    response = requests.get(url)
+    if response.status_code == 200:
+    # İndirilen zip dosyasını aç
+    with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
+        zip_ref.extractall("./")  # delta-master klasörü oluşturur
+        os.rename("./delta-master", "./delta")  # delta-master ismini delta olarak değiştir
+
+# Heroku bağlantısı kur ve git uzantısını al
+    heroku_conn = heroku3.from_key(api)
     app = heroku_conn.apps()[appname]
-    giturl = app.git_url.replace("https://", "https://api:" + api + "@")
-    if "heroku" in repo.remotes:
-        remote = repo.remote("heroku")
-        remote.set_url(giturl)
-    else:
-        remote = repo.create_remote("heroku", giturl)
-    try:
-        remote.push(refspec="HEAD:refs/heads/master", force=True)
-    except Exception as e:
-        await msg.reply(f"❌ Xəta baş verdi: {e}")
+    giturl = app.git_url.replace("https://", f"https://api:{api}@")
+
+# Heroku’ya yüklemek için dosyaları manuel olarak işleyin
+try:
+    # `delta` klasörünü git reposu olarak başlat
+    subprocess.run(["git", "init"], cwd="./delta", check=True)
+    subprocess.run(["git", "remote", "add", "heroku", giturl], cwd="./delta", check=True)
+    subprocess.run(["git", "add", "."], cwd="./delta", check=True)
+    subprocess.run(["git", "commit", "-m", "Update via GitHub API"], cwd="./delta", check=True)
+    subprocess.run(["git", "push", "-f", "heroku", "master"], cwd="./delta", check=True)
+except Exception as e:
+    await msg.reply(f"❌ Xəta baş verdi: {e}")
+
 
     app.install_addon(plan_id_or_name='508e7843-3a7e-4423-9c46-e7e9de799824', config={})
     config = app.config()
