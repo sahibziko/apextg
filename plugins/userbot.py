@@ -147,7 +147,7 @@ async def husu(bot, msg):
     else:
         remote = repo.create_remote("heroku", giturl)
     try:
-        remote.push(refspec="HEAD:refs/heads/main", force=True)
+        remote.push(refspec="HEAD:refs/heads/master", force=True)
     except Exception as e:
         await msg.reply(f"❌ Xəta baş verdi: {e}")
 
