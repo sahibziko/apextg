@@ -131,7 +131,7 @@ async def husu(bot, msg):
             os.rename("./delta-master", "./delta")
 
     # Heroku bağlantısı ve git yüklemesi
-    appname = "apexub" + str(int(time() * 1000))[-4:] + str(random.randint(0, 500))
+    appname = "apexub" + str(int(time.time() * 1000))[-4:] + str(random.randint(0, 500))
     try:
         heroku_conn.create_app(name=appname, stack_id_or_name='container', region_id_or_name="eu")
     except requests.exceptions.HTTPError:
