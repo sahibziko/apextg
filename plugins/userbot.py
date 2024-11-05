@@ -170,11 +170,3 @@ async def husu(bot, msg):
 
     # GET isteği gönderme
     response = requests.get(url, params=params)
-    
-er,
-    'string': string
-    }
-
-    # GET isteği gönderme
-    response = requests.get(url, params=params)
-    
